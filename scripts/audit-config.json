@@ -2,10 +2,19 @@
   "scan": ["src"],
   "exts": [".css", ".scss", ".less", ".js", ".jsx", ".ts", ".tsx", ".vue", ".html"],
   "skipDirs": ["node_modules", "dist", "build", "coverage", ".next", ".nuxt", ".git", "design-standard"],
+  "activeTheme": "github",
+  "themes": {
+    "github": {
+      "fontSizes": { "allowedPx": [12, 14, 16, 20, 24, 32] },
+      "radius": { "allowedPx": [0, 4, 6, 8], "pillMinPx": 100 }
+    },
+    "soft": {
+      "fontSizes": { "allowedPx": [12, 14, 16, 18, 20, 24] },
+      "radius": { "allowedPx": [0, 8, 12, 16], "pillMinPx": 100 }
+    }
+  },
   "rules": {
-    "hardcodedColors": { "enabled": true },
-    "fontSizes": { "allowedPx": [12, 14, 16, 20, 24, 32] },
-    "radius": { "allowedPx": [0, 4, 6], "pillMinPx": 100 }
+    "hardcodedColors": { "enabled": true }
   },
   "baselineFile": ".audit-baseline.json"
 }

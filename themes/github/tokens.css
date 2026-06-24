@@ -21,6 +21,12 @@
   --color-fg-subtle:         #818b98;   /* 占位符、最弱的元信息 */
   --color-fg-on-emphasis:    #ffffff;   /* 彩色实心按钮上的文字 */
 
+  /* 主操作别名 —— github 主题的 primary 指向成功绿 */
+  --color-primary-emphasis:  #1f883d;
+  --color-primary-hover:     #1a7f37;
+  --color-primary-active:    #176f31;
+  --color-primary-fg:        #1f883d;
+
   /* ---------------------------------------------------------------------------
      2. 语义色 —— 只允许小面积出现(状态点、细徽标、主按钮)
         每个语义有 3 个层级:fg(文字/图标) / emphasis(实心填充) / subtle(极浅底)
@@ -52,6 +58,13 @@
   --color-done-emphasis:     #8250df;
   --color-done-subtle:       #fbefff;
 
+  /* 徽标边框色 —— github 主题通常不用彩色描边,统一指向弱边框 */
+  --color-badge-border-accent:    var(--color-border-muted);
+  --color-badge-border-success:   var(--color-border-muted);
+  --color-badge-border-attention: var(--color-border-muted);
+  --color-badge-border-danger:    var(--color-border-muted);
+  --color-badge-border-done:      var(--color-border-muted);
+
   /* ---------------------------------------------------------------------------
      3. 间距 —— 只用这 7 档,全部是 4 的倍数
      --------------------------------------------------------------------------- */
@@ -62,6 +75,7 @@
   --space-5:  24px;
   --space-6:  32px;
   --space-7:  48px;
+  --space-8:  48px;
 
   /* ---------------------------------------------------------------------------
      4. 字号 —— 最多 6 档,正文统一用 --text-body(14px)
@@ -93,6 +107,7 @@
      --------------------------------------------------------------------------- */
   --radius-sm:   4px;     /* 小元素:输入框、按钮、徽标 */
   --radius-md:   6px;     /* 默认:卡片、面板 */
+  --radius-lg:   8px;     /* 仅为跨主题契约补齐,github 全局仍保持小圆角 */
   --radius-pill: 999px;   /* 状态点 / 头像 */
 
   --border-width: 1px;
@@ -102,12 +117,16 @@
         卡片、区块一律用边框分隔,不要投影。
      --------------------------------------------------------------------------- */
   --shadow-none:    none;
+  --shadow-sm:      none;
   --shadow-overlay: 0 8px 24px rgba(31, 35, 40, 0.12);  /* 弹窗 / 下拉菜单 */
 
   /* ---------------------------------------------------------------------------
      7. 其它
      --------------------------------------------------------------------------- */
   --transition: 120ms ease;
+
+  --scrollbar-size:  4px;
+  --scrollbar-thumb: #d0d7de;
 }
 
 /* =============================================================================

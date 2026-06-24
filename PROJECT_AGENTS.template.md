@@ -41,7 +41,7 @@
 - 间距是否是 4 的倍数且来自 token
 - 是否无彩色背景区域 / 卡片
 - 灰度下层级是否仍清晰
-- `node design-standard/scripts/audit-all.mjs` 是否无新增违规
+- `AUDIT_THEME=<当前主题名> node design-standard/scripts/audit-all.mjs` 是否无新增违规
 
 反哺分流:
 
@@ -52,7 +52,7 @@
 
 审计 baseline:
 
-- 首次接入历史项目时运行 `node design-standard/scripts/audit-all.mjs --update-baseline`,把现有违规记录到项目根目录 `.audit-baseline.json`。
+- 首次接入历史项目时运行 `AUDIT_THEME=<当前主题名> node design-standard/scripts/audit-all.mjs --update-baseline`,把现有违规记录到项目根目录 `.audit-baseline.json`。
 - `.audit-baseline.json` 应提交到消费项目仓库。
 - 修复一批历史违规后再次运行 `--update-baseline`,把 baseline 往下收紧。
 ```

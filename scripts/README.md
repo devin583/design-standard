@@ -13,6 +13,9 @@ node design-standard/scripts/audit-all.mjs --update-baseline
 # 之后每次检查:只要没有新增违规就通过
 node design-standard/scripts/audit-all.mjs
 
+# soft 主题项目
+AUDIT_THEME=soft node design-standard/scripts/audit-all.mjs
+
 # 修好一批历史问题后,锁定收益
 node design-standard/scripts/audit-all.mjs --update-baseline
 
@@ -21,12 +24,13 @@ node design-standard/scripts/audit-all.mjs --report
 ```
 
 - 配置在 `design-standard/scripts/audit-config.json`。
+- 默认审计主题是 `github`;可用环境变量覆盖,例如 `AUDIT_THEME=soft`。
 - baseline 默认写在当前项目根目录 `.audit-baseline.json`,应提交进消费项目仓库。
 - 可传扫描目录覆盖配置里的默认 `src`,例如 `node design-standard/scripts/audit-all.mjs app components`。
 
 ## 快速单项检查
 
-单项脚本不使用 baseline,发现违规时直接退出码为 1。
+单项脚本不使用 baseline,发现违规时直接退出码为 1。它们同样读取 `AUDIT_THEME`。
 
 ```bash
 node design-standard/scripts/audit-hardcoded-colors.mjs src

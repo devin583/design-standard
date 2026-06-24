@@ -15,6 +15,10 @@
   --color-fg-muted:          #59636e;
   --color-fg-subtle:         #818b98;
   --color-fg-on-emphasis:    #ffffff;
+  --color-primary-emphasis:  #1f883d;
+  --color-primary-hover:     #1a7f37;
+  --color-primary-active:    #176f31;
+  --color-primary-fg:        #1f883d;
 
   /* 2. 语义色(只小面积用) */
   --color-accent-fg:         #0969da;
@@ -32,10 +36,15 @@
   --color-done-fg:           #8250df;
   --color-done-emphasis:     #8250df;
   --color-done-subtle:       #fbefff;
+  --color-badge-border-accent:    var(--color-border-muted);
+  --color-badge-border-success:   var(--color-border-muted);
+  --color-badge-border-attention: var(--color-border-muted);
+  --color-badge-border-danger:    var(--color-border-muted);
+  --color-badge-border-done:      var(--color-border-muted);
 
   /* 3. 间距(4 的倍数) */
   --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
-  --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 48px;
 
   /* 4. 字号 / 字重 / 字体 */
   --text-meta: 12px; --text-body: 14px; --text-md: 16px;
@@ -47,13 +56,16 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* 5. 形状 */
-  --radius-sm: 4px; --radius-md: 6px; --radius-pill: 999px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-pill: 999px;
   --border-width: 1px;
 
   /* 6. 阴影(几乎不用) */
   --shadow-none: none;
+  --shadow-sm: none;
   --shadow-overlay: 0 8px 24px rgba(31, 35, 40, 0.12);
 
   /* 7. 其它 */
   --transition: 120ms ease;
+  --scrollbar-size: 4px;
+  --scrollbar-thumb: #d0d7de;
 }

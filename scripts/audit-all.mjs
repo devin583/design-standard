@@ -22,6 +22,21 @@ const roots = rootArgs.length ? rootArgs : (cfg.scan?.length ? cfg.scan : ["src"
 const baselinePath = resolve(process.cwd(), cfg.baselineFile || ".audit-baseline.json");
 const exts = new Set(cfg.exts || []);
 const skipDirs = new Set(cfg.skipDirs || []);
+const activeTheme = process.env.AUDIT_THEME || cfg.activeTheme || "github";
+const themeRules = cfg.themes?.[activeTheme];
+
+if (!themeRules) {
+  const available = Object.keys(cfg.themes || {}).join(", ") || "(none)";
+  console.error(`未知审计主题: ${activeTheme}`);
+  console.error(`可用主题: ${available}`);
+  process.exit(2);
+}
+
+const rules = {
+  hardcodedColors: cfg.rules?.hardcodedColors ?? { enabled: true },
+  fontSizes: themeRules.fontSizes,
+  radius: themeRules.radius,
+};
 
 const hex = /#[0-9a-fA-F]{3,8}\b/g;
 const colorFunc = /\b(rgb|rgba|hsl|hsla)\s*\(/g;
@@ -106,7 +121,7 @@ async function scan() {
 
       const text = await readFile(file, "utf8");
       text.split("\n").forEach((line, index) => {
-        for (const violation of scanLine(line, cfg.rules || {})) {
+        for (const violation of scanLine(line, rules)) {
           violations.push({
             ...violation,
             file: normalize(file).split(sep).join("/"),
@@ -163,6 +178,8 @@ const counts = countByRuleAndFile(violations);
 const fingerprints = countByFingerprint(violations);
 const totals = totalByRule(counts);
 
+console.log(`审计主题: ${activeTheme}`);
+
 if (flags.has("--report")) {
   for (const violation of violations) {
     console.log(`${violation.file}:${violation.line}  [${violation.rule}] ${violation.value}`);
@@ -174,7 +191,7 @@ if (flags.has("--report")) {
 if (flags.has("--update-baseline")) {
   await writeFile(
     baselinePath,
-    JSON.stringify({ generatedAt: new Date().toISOString(), counts, totals, fingerprints }, null, 2) + "\n",
+    JSON.stringify({ generatedAt: new Date().toISOString(), theme: activeTheme, counts, totals, fingerprints }, null, 2) + "\n",
   );
   console.log(`已写入 baseline -> ${baselinePath}`);
   console.log(`合计: ${JSON.stringify(totals)}`);
@@ -190,6 +207,12 @@ try {
   hasBaseline = false;
   console.log("未找到 baseline。首次接入历史项目请先运行:");
   console.log("  node design-standard/scripts/audit-all.mjs --update-baseline\n");
+}
+
+if (hasBaseline && baseline.theme && baseline.theme !== activeTheme) {
+  console.error(`baseline 主题是 ${baseline.theme},当前审计主题是 ${activeTheme}。`);
+  console.error("请使用正确的 AUDIT_THEME,或在确认切换主题后重跑 --update-baseline。");
+  process.exit(1);
 }
 
 const baselineFingerprints = baseline.fingerprints || {};

@@ -30,6 +30,7 @@ design-standard/
       tokens.css            #   颜色/间距/字号的唯一数值来源
       PRINCIPLES.md         #   本风格补充规则
       DECISIONS.md          #   本风格决策
+    soft/                   # 风格2:中性深色 / 柔和圆角(来自 expat-flow)
     _template/              # 新风格起点:复制它,改值即可
   interaction/              # 交互反馈规范(与风格无关)
     mutation-feedback.md    #   写操作反馈铁律
@@ -95,6 +96,9 @@ node design-standard/scripts/audit-all.mjs --update-baseline
 # 之后:只要没有新增违规就通过
 node design-standard/scripts/audit-all.mjs
 
+# soft 主题项目
+AUDIT_THEME=soft node design-standard/scripts/audit-all.mjs
+
 # 修好一批历史问题后,锁定收益
 node design-standard/scripts/audit-all.mjs --update-baseline
 ```
@@ -107,7 +111,7 @@ node design-standard/scripts/audit-font-sizes.mjs src
 node design-standard/scripts/audit-radius.mjs src
 ```
 
-配置在 `design-standard/scripts/audit-config.json`。baseline 默认写入消费项目根目录 `.audit-baseline.json`,应随消费项目提交。静态脚本只能抓写法偏差;“彩色面积 <= 8%”和灰度层级仍需要看真实截图。
+配置在 `design-standard/scripts/audit-config.json`。默认审计主题是 `github`,可用 `AUDIT_THEME=soft` 覆盖。baseline 默认写入消费项目根目录 `.audit-baseline.json`,应随消费项目提交。静态脚本只能抓写法偏差;“彩色面积 <= 8%”和灰度层级仍需要看真实截图。
 
 ## 从好项目提炼标准
 
