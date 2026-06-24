@@ -1,0 +1,145 @@
+/* =============================================================================
+   DESIGN TOKENS — 唯一的视觉数值来源
+   -----------------------------------------------------------------------------
+   规则:所有组件只准引用这里的变量,禁止在组件里写死颜色 / 像素 / 字号。
+   想全局调整视觉?只改这个文件,不要去改组件。
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     1. 中性色阶 —— 界面的 ~90% 由它构成
+     --------------------------------------------------------------------------- */
+  --color-canvas:            #ffffff;   /* 页面 / 卡片背景 */
+  --color-canvas-subtle:     #f6f8fa;   /* 次级背景:表头、悬停行、输入框底 */
+  --color-canvas-inset:      #eaeef2;   /* 更深的内嵌背景(很少用) */
+
+  --color-border:            #d0d7de;   /* 默认边框,1px */
+  --color-border-muted:      #eaeef2;   /* 分隔线 / 更弱的边框 */
+
+  --color-fg-default:        #1f2328;   /* 主文字 */
+  --color-fg-muted:          #59636e;   /* 次要文字、说明、标签 */
+  --color-fg-subtle:         #818b98;   /* 占位符、最弱的元信息 */
+  --color-fg-on-emphasis:    #ffffff;   /* 彩色实心按钮上的文字 */
+
+  /* ---------------------------------------------------------------------------
+     2. 语义色 —— 只允许小面积出现(状态点、细徽标、主按钮)
+        每个语义有 3 个层级:fg(文字/图标) / emphasis(实心填充) / subtle(极浅底)
+        ⚠ subtle 底色只用于「小徽标」,绝不用于整块区域 / 卡片背景。
+     --------------------------------------------------------------------------- */
+
+  /* 主操作 / 链接 —— 蓝 */
+  --color-accent-fg:         #0969da;
+  --color-accent-emphasis:   #0969da;
+  --color-accent-subtle:     #ddf4ff;
+
+  /* 创建 / 成功 / 完成 —— 绿(主按钮用这个) */
+  --color-success-fg:        #1a7f37;
+  --color-success-emphasis:  #1f883d;
+  --color-success-subtle:    #dafbe1;
+
+  /* 临近截止 / 注意 —— 黄 */
+  --color-attention-fg:      #9a6700;
+  --color-attention-emphasis:#bf8700;
+  --color-attention-subtle:  #fff8c5;
+
+  /* 超期 / 危险 / 删除 —— 红 */
+  --color-danger-fg:         #cf222e;
+  --color-danger-emphasis:   #cf222e;
+  --color-danger-subtle:     #ffebe9;
+
+  /* 停滞 / 阻塞等其它状态 —— 紫(如确实需要第 5 种状态色才用) */
+  --color-done-fg:           #8250df;
+  --color-done-emphasis:     #8250df;
+  --color-done-subtle:       #fbefff;
+
+  /* ---------------------------------------------------------------------------
+     3. 间距 —— 只用这 7 档,全部是 4 的倍数
+     --------------------------------------------------------------------------- */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+
+  /* ---------------------------------------------------------------------------
+     4. 字号 —— 最多 6 档,正文统一用 --text-body(14px)
+     --------------------------------------------------------------------------- */
+  --text-meta:    12px;   /* 元信息:时间、计数、标签内文字 */
+  --text-body:    14px;   /* 正文 / 默认 */
+  --text-md:      16px;   /* 小标题 / 强调正文 */
+  --text-lg:      20px;   /* 区块标题 */
+  --text-xl:      24px;   /* 页面标题 */
+  --text-2xl:     32px;   /* 大数字 / 大标题(克制使用) */
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+
+  /* 字重 —— 只用 3 档 */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+
+  /* 字体 —— 系统字体栈,无需加载、渲染最快 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial,
+               sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", monospace;
+
+  /* ---------------------------------------------------------------------------
+     5. 形状 —— 圆角小、边框细
+     --------------------------------------------------------------------------- */
+  --radius-sm:   4px;     /* 小元素:输入框、按钮、徽标 */
+  --radius-md:   6px;     /* 默认:卡片、面板 */
+  --radius-pill: 999px;   /* 状态点 / 头像 */
+
+  --border-width: 1px;
+
+  /* ---------------------------------------------------------------------------
+     6. 阴影 —— 几乎不用。只有「浮在页面之上」的东西(弹窗、下拉)才允许一层。
+        卡片、区块一律用边框分隔,不要投影。
+     --------------------------------------------------------------------------- */
+  --shadow-none:    none;
+  --shadow-overlay: 0 8px 24px rgba(31, 35, 40, 0.12);  /* 弹窗 / 下拉菜单 */
+
+  /* ---------------------------------------------------------------------------
+     7. 其它
+     --------------------------------------------------------------------------- */
+  --transition: 120ms ease;
+}
+
+/* =============================================================================
+   用法示例(供参考,组件应这样引用 token,而不是写死值)
+   -----------------------------------------------------------------------------
+
+   .card {
+     background: var(--color-canvas);
+     border: var(--border-width) solid var(--color-border);
+     border-radius: var(--radius-md);
+     padding: var(--space-4);
+   }
+
+   .btn-primary {
+     background: var(--color-success-emphasis);
+     color: var(--color-fg-on-emphasis);
+     border-radius: var(--radius-sm);
+     padding: var(--space-2) var(--space-4);
+     font-weight: var(--weight-medium);
+   }
+
+   .badge-attention {                     // 「临近截止」这类小徽标 —— 唯一允许用 subtle 底的地方
+     color: var(--color-attention-fg);
+     background: var(--color-attention-subtle);
+     font-size: var(--text-meta);
+     border-radius: var(--radius-sm);
+     padding: 2px var(--space-2);
+   }
+
+   .status-dot {                          // 用一个小圆点表达状态,而不是整块背景
+     width: 8px; height: 8px;
+     border-radius: var(--radius-pill);
+     background: var(--color-danger-emphasis);
+   }
+   ============================================================================= */
