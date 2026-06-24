@@ -22,6 +22,7 @@ design-standard/
   DECISIONS.core.md         # 跨风格通用决策
   AGENTS.md                 # 给 Codex 的指令(含主题选择 + 反哺分流)
   HARVEST.md                # 从已验证项目里提炼标准的协议
+  VERSIONING.md             # 轻量版本治理:breaking 判定 + 更新检查清单
   PROJECT_AGENTS.template.md # 消费项目 AGENTS.md 片段
   README.md
   themes/
@@ -85,10 +86,17 @@ git clone --recurse-submodules <项目地址>
 
 ## 自动审计
 
-改完 UI 后建议跑一遍:
+历史项目往往已有违规,直接接 CI 会被噪音淹没。推荐先建立 baseline,之后只拦新增违规,修一批就更新一次 baseline,把收益锁住。
 
 ```bash
-node design-standard/scripts/audit-all.mjs src
+# 首次接入:把现有违规记为基线
+node design-standard/scripts/audit-all.mjs --update-baseline
+
+# 之后:只要没有新增违规就通过
+node design-standard/scripts/audit-all.mjs
+
+# 修好一批历史问题后,锁定收益
+node design-standard/scripts/audit-all.mjs --update-baseline
 ```
 
 也可以单独运行:
@@ -99,7 +107,7 @@ node design-standard/scripts/audit-font-sizes.mjs src
 node design-standard/scripts/audit-radius.mjs src
 ```
 
-这些脚本发现违规时退出码为 1,适合接 CI 或 pre-commit。静态脚本只能抓写法偏差;“彩色面积 <= 8%”和灰度层级仍需要看真实截图。
+配置在 `design-standard/scripts/audit-config.json`。baseline 默认写入消费项目根目录 `.audit-baseline.json`,应随消费项目提交。静态脚本只能抓写法偏差;“彩色面积 <= 8%”和灰度层级仍需要看真实截图。
 
 ## 从好项目提炼标准
 
@@ -110,6 +118,10 @@ node design-standard/scripts/audit-radius.mjs src
 ```
 
 它应该先产出提炼报告,等你确认后再写入 `design-standard/` 对应层并 push。不要把项目代码搬进标准,只提炼已验证且可泛化的规则。
+
+## 版本治理
+
+消费项目用 submodule 引用本仓库时,锁定的是一个具体 commit。本仓库更新不会自动影响消费项目,只有消费项目执行 `git submodule update --remote design-standard` 后才会改变。删除或重命名 token 变量属于 breaking;新增规范、脚本和主题通常是 minor。详见 `VERSIONING.md`。
 
 ## 迭代闭环
 

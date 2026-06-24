@@ -28,11 +28,11 @@
 ## 工作方式
 - 较大的视觉改动:**先输出审计 + 方案,等我确认再改代码**,不要直接大改。
 - 每次改完 UI 自检并在回复里报告:彩色面积 ≤ 8% / 字号 ≤ 6 档 / 字重 ≤ 3 档 / 间距是 4 的倍数且来自 token / 无彩色背景区域 / 灰度测试通过。
-- 改完应跑一遍审计脚本并确保通过:`node design-standard/scripts/audit-all.mjs src`。
+- 改完应跑统一审计并确保无新增违规:`node design-standard/scripts/audit-all.mjs`。首次接入历史项目先运行 `node design-standard/scripts/audit-all.mjs --update-baseline` 建立 baseline。
 - 涉及写操作(创建/保存/删除等)时,必须满足 `interaction/mutation-feedback.md` 的铁律:pending 态、防重复提交、成功可见反馈、成功后刷新或乐观更新、失败不清空输入、失败给出可读错误。
 
 ## 从已验证项目提炼标准
-当我让你把某个「不错的项目」里的优秀实践沉淀进标准时,按 `HARVEST.md` 执行:先出提炼报告,等我确认,再写入并 push 子模块。
+当我让你把某个「不错的项目」里的优秀实践沉淀进标准时,按 `HARVEST.md` 执行:先出提炼报告,每条必须包含证据来源和适用边界,等我确认后再写入并 push 子模块。
 
 ## 决策的「反哺分流」(重要)
 当我给出新的视觉判断 / 纠正时,按适用范围归档,不要只在对话里说完就算:

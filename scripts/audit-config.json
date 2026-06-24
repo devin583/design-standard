@@ -1,0 +1,11 @@
+{
+  "scan": ["src"],
+  "exts": [".css", ".scss", ".less", ".js", ".jsx", ".ts", ".tsx", ".vue", ".html"],
+  "skipDirs": ["node_modules", "dist", "build", "coverage", ".next", ".nuxt", ".git", "design-standard"],
+  "rules": {
+    "hardcodedColors": { "enabled": true },
+    "fontSizes": { "allowedPx": [12, 14, 16, 20, 24, 32] },
+    "radius": { "allowedPx": [0, 4, 6], "pillMinPx": 100 }
+  },
+  "baselineFile": ".audit-baseline.json"
+}
