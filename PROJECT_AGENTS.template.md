@@ -18,12 +18,20 @@
 4. `design-standard/<当前主题>/PRINCIPLES.md`
 5. `design-standard/<当前主题>/DECISIONS.md`
 
+按需查阅:
+
+- 写操作: `design-standard/interaction/mutation-feedback.md`
+- 组件规则: `design-standard/components/<name>.md`
+- 页面模式: `design-standard/patterns/<name>.md`
+- 视觉参照: `design-standard/screenshots/<当前主题>/`
+
 硬性要求:
 
 - 颜色 / 间距 / 字号 / 圆角只能引用当前主题 `tokens.css` 的变量,禁止在组件里写死 `#hex` 或随手像素。
 - 禁止用彩色背景填充卡片或区域;颜色只用于状态、小徽标、链接和主操作按钮。
 - 区域靠 1px 边框和留白区分,不靠颜色块或阴影。
 - 较大的视觉改动先输出审计和方案,确认后再改代码。
+- 涉及写操作时必须满足 `mutation-feedback.md`:pending 态、防重复提交、成功可见反馈、成功后刷新或乐观更新、失败不清空输入、失败给出可读错误。
 
 改完 UI 后报告自检结果:
 
@@ -33,6 +41,7 @@
 - 间距是否是 4 的倍数且来自 token
 - 是否无彩色背景区域 / 卡片
 - 灰度下层级是否仍清晰
+- `node design-standard/scripts/audit-all.mjs src` 是否通过
 
 反哺分流:
 

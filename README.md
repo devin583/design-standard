@@ -21,6 +21,8 @@ design-standard/
   PRINCIPLES.core.md        # 跨风格通用原则 + 硬规则(很少改)
   DECISIONS.core.md         # 跨风格通用决策
   AGENTS.md                 # 给 Codex 的指令(含主题选择 + 反哺分流)
+  HARVEST.md                # 从已验证项目里提炼标准的协议
+  PROJECT_AGENTS.template.md # 消费项目 AGENTS.md 片段
   README.md
   themes/
     github/                 # 风格1:克制专业(默认)
@@ -28,7 +30,15 @@ design-standard/
       PRINCIPLES.md         #   本风格补充规则
       DECISIONS.md          #   本风格决策
     _template/              # 新风格起点:复制它,改值即可
+  interaction/              # 交互反馈规范(与风格无关)
+    mutation-feedback.md    #   写操作反馈铁律
+  components/               # 组件规范(规则非实现,用到再按 _template 新建)
+  patterns/                 # 页面信息架构规范(用到再按 _template 新建)
+  scripts/                  # 自动审计(把建议变成约束)
+  screenshots/              # 视觉参照基准(按主题存放)
 ```
+> 分层心法:`tokens` 管数值,`PRINCIPLES/components/patterns/interaction` 管规则,`scripts` 抓偏差,`DECISIONS/HARVEST` 沉淀判断。这是一套面向 AI 的轻量设计操作系统,不是组件库。
+>
 > 跨主题契约:`tokens.css` 的变量名固定不变,各主题只改“值”。这样同一份组件代码换主题即可换皮。
 
 ## 推荐引用方式
@@ -72,6 +82,34 @@ git clone --recurse-submodules <项目地址>
 ### 3. 可选:放进 Codex 全局配置
 
 如果大多数项目都使用这套标准,可以把 `PROJECT_AGENTS.template.md` 的内容放进 `~/.codex/AGENTS.md`。项目仍应在根目录声明“当前主题”,因为主题是项目级选择。
+
+## 自动审计
+
+改完 UI 后建议跑一遍:
+
+```bash
+node design-standard/scripts/audit-all.mjs src
+```
+
+也可以单独运行:
+
+```bash
+node design-standard/scripts/audit-hardcoded-colors.mjs src
+node design-standard/scripts/audit-font-sizes.mjs src
+node design-standard/scripts/audit-radius.mjs src
+```
+
+这些脚本发现违规时退出码为 1,适合接 CI 或 pre-commit。静态脚本只能抓写法偏差;“彩色面积 <= 8%”和灰度层级仍需要看真实截图。
+
+## 从好项目提炼标准
+
+打开一个你认可的项目后,可以让 Codex 执行:
+
+```text
+当前项目是 <项目名>,请按 design-standard/HARVEST.md 执行提炼。
+```
+
+它应该先产出提炼报告,等你确认后再写入 `design-standard/` 对应层并 push。不要把项目代码搬进标准,只提炼已验证且可泛化的规则。
 
 ## 迭代闭环
 
