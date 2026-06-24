@@ -55,7 +55,10 @@
   --color-danger-emphasis:   #ef4444;   /* red-500(通知红点) */
   --color-danger-subtle:     #fef2f2;   /* red-50 */
 
-  /* 员工负责 / 特殊归属 —— 紫 */
+  /* 员工负责 / 特殊归属 —— 紫
+     ⚠ 本主题中此变量双重用途:① 「阻塞/停滞」等第 5 状态;
+        ② workflow 工具中「员工角色」徽标。
+        角色徽标不表达任何好坏,仅做视觉区分,复用此色槽是合理的。 */
   --color-done-fg:           #6d28d9;   /* violet-700 */
   --color-done-emphasis:     #7c3aed;   /* violet-600 */
   --color-done-subtle:       #f5f3ff;   /* violet-50 */
@@ -63,12 +66,26 @@
   /* 徽标边框习惯用对应色的 -100,见 PRINCIPLES.md */
   --color-badge-border-accent:    #dbeafe; /* blue-100 */
   --color-badge-border-success:   #dcfce7; /* green-100 */
-  --color-badge-border-attention: #fde68a; /* amber-100 区 */
+  --color-badge-border-attention: #fde68a; /* amber-100 近似 */
   --color-badge-border-danger:    #fee2e2; /* red-100 */
   --color-badge-border-done:      #ede9fe; /* violet-100 */
 
+  /* HR 负责 / 处理方角色徽标 —— 天蓝(soft 主题 workflow 工具专属)
+     ⚠ 仅用于角色归属徽标,不用于状态表达。
+        github 主题 / 其他主题可回填自己适合的值(默认回退到 done)。 */
+  --color-role-fg:           #0369a1;   /* sky-700 */
+  --color-role-subtle:       #f0f9ff;   /* sky-50 */
+  --color-badge-border-role: #bae6fd;   /* sky-100 */
+
   /* ---------------------------------------------------------------------------
-     4. 间距(4 的倍数;本主题卡片偏舒适,常用 16/20/24)
+     4. 交互状态色 —— 焦点环 / 焦点边框
+        soft 主题用中性 slate,不用彩色聚焦环(克制优先)。
+     --------------------------------------------------------------------------- */
+  --color-focus-ring:        #cbd5e1;   /* slate-300,输入框 / 可聚焦元素的外环 */
+  --color-focus-border:      #94a3b8;   /* slate-400,聚焦时的边框高亮 */
+
+  /* ---------------------------------------------------------------------------
+     5. 间距(4 的倍数;本主题卡片偏舒适,常用 16/20/24)
      --------------------------------------------------------------------------- */
   --space-1:   4px;
   --space-2:   8px;
@@ -80,7 +97,7 @@
   --space-8:  48px;
 
   /* ---------------------------------------------------------------------------
-     5. 字号 / 字重 / 字体(14px 主导)
+     6. 字号 / 字重 / 字体(14px 主导)
      --------------------------------------------------------------------------- */
   --text-meta:    12px;   /* 元信息 / 标签 */
   --text-body:    14px;   /* 正文 / 默认(本主题绝大多数文字) */
@@ -96,12 +113,14 @@
   --weight-medium:   500;   /* 按钮 / 导航项 */
   --weight-semibold: 600;   /* 标题 */
 
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
-               'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  /* 系统字体栈 —— 无额外加载,中英文均覆盖
+     ⚠ 本主题不引入 Inter 等外部字体(来源项目 expat-flow 未加载任何 Web Font)。 */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+               'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* ---------------------------------------------------------------------------
-     6. 形状 —— 本主题的另一签名:更大的圆角
+     7. 形状 —— 本主题的另一签名:更大的圆角
      --------------------------------------------------------------------------- */
   --radius-sm:   8px;     /* 小按钮 / 小图标钮 (rounded-lg) */
   --radius-md:  12px;     /* 按钮 / 输入框 (rounded-xl) */
@@ -111,7 +130,7 @@
   --border-width: 1px;
 
   /* ---------------------------------------------------------------------------
-     7. 阴影 —— 本主题允许卡片有一层很淡的阴影(github 主题不允许)
+     8. 阴影 —— 本主题允许卡片有一层很淡的阴影(github 主题不允许)
      --------------------------------------------------------------------------- */
   --shadow-none:    none;
   --shadow-sm:      0 1px 2px 0 rgba(0, 0, 0, 0.05);                 /* 卡片 */
@@ -119,7 +138,7 @@
                     0 8px 10px -6px rgba(0, 0, 0, 0.1);              /* 弹窗 */
 
   /* ---------------------------------------------------------------------------
-     8. 其它
+     9. 其它
      --------------------------------------------------------------------------- */
   --transition: 150ms ease;
 
@@ -129,10 +148,13 @@
 }
 
 /* =============================================================================
-   相对 github 主题的新增变量(供参考,后续可考虑回填到 github 主题以统一契约):
-     --color-primary-*        中性深色主操作(github 主操作=绿,可加 primary 指向绿)
-     --radius-lg              16px 大圆角
-     --shadow-sm              卡片淡阴影
-     --space-8                48px(github 为 --space-7)
-     --color-badge-border-*   徽标边框色
+   相对 github 主题的新增变量说明(可考虑回填到 github/_template 以统一契约):
+     --color-primary-*           中性深色主操作(github 主操作=绿)
+     --color-role-*              角色归属徽标色(workflow 工具专用;github 可回退到 done)
+     --color-badge-border-role   角色徽标描边
+     --color-focus-ring          焦点外环(soft=slate-300;github=蓝)
+     --color-focus-border        焦点边框高亮(soft=slate-400)
+     --radius-lg                 16px 大圆角
+     --shadow-sm                 卡片淡阴影(github=none)
+     --space-8                   48px(github --space-7 同值,此处独立出第 8 档)
    ============================================================================= */

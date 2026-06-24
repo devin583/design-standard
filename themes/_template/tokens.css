@@ -41,6 +41,10 @@
   --color-badge-border-attention: var(--color-border-muted);
   --color-badge-border-danger:    var(--color-border-muted);
   --color-badge-border-done:      var(--color-border-muted);
+  /* 角色归属徽标(workflow 工具专用,无需求可回退到 done 值) */
+  --color-role-fg:                var(--color-done-fg);
+  --color-role-subtle:            var(--color-done-subtle);
+  --color-badge-border-role:      var(--color-badge-border-done);
 
   /* 3. 间距(4 的倍数) */
   --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
@@ -63,6 +67,10 @@
   --shadow-none: none;
   --shadow-sm: none;
   --shadow-overlay: 0 8px 24px rgba(31, 35, 40, 0.12);
+
+  /* 焦点环 / 焦点边框 */
+  --color-focus-ring:   #d0d7de;   /* 覆盖为主题适合的颜色 */
+  --color-focus-border: #8c959f;
 
   /* 7. 其它 */
   --transition: 120ms ease;
