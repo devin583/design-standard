@@ -38,7 +38,7 @@ design-standard/
 在每个要用标准的项目根目录:
 
 ```bash
-git submodule add https://github.com/<你的用户名>/design-standard.git design-standard
+git submodule add https://github.com/devin583/design-standard.git design-standard
 git commit -m "chore: add design-standard submodule"
 ```
 
