@@ -16,11 +16,13 @@
 
   --color-border:            #e5e7eb;   /* 默认边框 gray-200(输入框、次级按钮) */
   --color-border-muted:      #f3f4f6;   /* 卡片边框 / 分隔线 gray-100 */
+  --color-border-emphasis:   #d1d5db;   /* hover / active 加重边框 gray-300 */
 
   --color-fg-default:        #111827;   /* 主文字 gray-900 */
   --color-fg-muted:          #4b5563;   /* 次要文字 gray-600 */
   --color-fg-subtle:         #9ca3af;   /* 占位符 / 图标 gray-400 */
   --color-fg-on-emphasis:    #ffffff;   /* 深色 / 实心按钮上的文字 */
+  --color-overlay-backdrop:  rgba(17, 24, 39, 0.4); /* 弹窗 / 抽屉遮罩 gray-900/40 */
 
   /* ---------------------------------------------------------------------------
      2. 主操作色 —— 本主题的标志:中性深色,不是彩色

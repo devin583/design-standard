@@ -11,10 +11,12 @@
   --color-canvas-inset:      #eaeef2;
   --color-border:            #d0d7de;
   --color-border-muted:      #eaeef2;
+  --color-border-emphasis:   #afb8c1;   /* hover / active 加重边框 */
   --color-fg-default:        #1f2328;
   --color-fg-muted:          #59636e;
   --color-fg-subtle:         #818b98;
   --color-fg-on-emphasis:    #ffffff;
+  --color-overlay-backdrop:  rgba(31, 35, 40, 0.35); /* 弹窗 / 抽屉遮罩 */
   --color-primary-emphasis:  #1f883d;
   --color-primary-hover:     #1a7f37;
   --color-primary-active:    #176f31;

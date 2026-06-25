@@ -15,11 +15,13 @@
 
   --color-border:            #d0d7de;   /* 默认边框,1px */
   --color-border-muted:      #eaeef2;   /* 分隔线 / 更弱的边框 */
+  --color-border-emphasis:   #afb8c1;   /* hover / active 时加重的边框 */
 
   --color-fg-default:        #1f2328;   /* 主文字 */
   --color-fg-muted:          #59636e;   /* 次要文字、说明、标签 */
   --color-fg-subtle:         #818b98;   /* 占位符、最弱的元信息 */
   --color-fg-on-emphasis:    #ffffff;   /* 彩色实心按钮上的文字 */
+  --color-overlay-backdrop:  rgba(31, 35, 40, 0.35);   /* 弹窗 / 抽屉的遮罩层 */
 
   /* 主操作别名 —— github 主题的 primary 指向成功绿 */
   --color-primary-emphasis:  #1f883d;
